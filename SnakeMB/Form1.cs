@@ -45,29 +45,39 @@ namespace SnakeMB
             if (Press.Button(Keys.Up)) if (kierunek !=4 ) kierunek = 3;
             if (Press.Button(Keys.Down)) if (kierunek != 4) kierunek = 4;
             playground.Invalidate();
-        } 
+        }
 
         private void MoveSnake(object sender, EventArgs e)
         {
-            for (int j = snake.Count -1 ; j >= 0; j--)
+
+            for (int j = snake.Count - 1; j >= 0; j--)
             {
-           
-                if (kierunek == 1) snake[0].X++;
-                if (kierunek == 2) snake[0].X--;
-                if (kierunek == 3) snake[0].Y--;
-                if (kierunek == 4) snake[0].Y++;
-            }
-            Snake head = snake[0];
-            for(int k=0; k<snake.Count; k++)
-            {
-                if (head.X == insect.X && insect.Y == head.Y)
+                if (j == 0)
                 {
+                    if (kierunek == 1) snake[0].X++;
+                    if (kierunek == 2) snake[0].X--;
+                    if (kierunek == 3) snake[0].Y--;
+                    if (kierunek == 4) snake[0].Y++;
 
-                    NewInsect();
+                    Snake head = snake[0];
+                    for (int k = 0; k < snake.Count; k++)
+                    {
+                        if (head.X == insect.X && insect.Y == head.Y)
+                        {
+                            Snake longer = new Snake(snake[snake.Count - 1].X, snake[snake.Count - 1].Y);
+                            snake.Add(longer);
+                            NewInsect();
 
+                        }
+                    }
                 }
-            }
+                else
+                {
+                    snake[j].Y = snake[j - 1].Y;
+                    snake[j].X = snake[j - 1].X;
+                }
 
+            }
         }
 
         private void playground_Paint(object sender, PaintEventArgs e)
@@ -85,9 +95,11 @@ namespace SnakeMB
         private void Draw(Graphics graphics)
         {
             graphics.FillRectangle(new SolidBrush(Color.Brown), new Rectangle(insect.X * 20, insect.Y * 20, 20, 20));
-            Color kolor_weza = i == 0 ? Color.DarkGreen : Color.Green;
-            Snake actualPart = snake[i];
-            graphics.FillRectangle(new SolidBrush(kolor_weza), new Rectangle(actualPart.X * 20, actualPart.Y * 20, 20, 20));
+            for (i = 0; i < snake.Count; i++) {
+                Color kolor_weza = i == 0 ? Color.DarkGreen : Color.Green;
+                Snake actualPart = snake[i];
+                graphics.FillRectangle(new SolidBrush(kolor_weza), new Rectangle(actualPart.X * 20, actualPart.Y * 20, 20, 20));
+            }
         }
        
         private void NewInsect()
