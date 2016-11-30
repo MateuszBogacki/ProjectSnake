@@ -23,13 +23,14 @@ namespace SnakeMB
         public Form1()
         {
             InitializeComponent();
-            snake.Clear();
+            
             gameLoop.Tick += new EventHandler(KierunekRuchu);
             snakeLoop.Tick += new EventHandler(MoveSnake);
             gameLoop.Interval = 1000 / 60;
             snakeLoop.Interval = 1000 / 5;
             gameLoop.Start();
             snakeLoop.Start();
+            snake.Clear();
             Snake head = new Snake(0,0);
             snake.Add(head);
             NewInsect();
@@ -39,10 +40,10 @@ namespace SnakeMB
 
         private void KierunekRuchu(object sender, EventArgs e)
         {
-            if (Press.Button(Keys.Right)) kierunek = 1;
-            if (Press.Button(Keys.Left)) kierunek = 2;
-            if (Press.Button(Keys.Up)) kierunek = 3;
-            if (Press.Button(Keys.Down)) kierunek = 4;
+            if (Press.Button(Keys.Right)) if (kierunek != 2) kierunek = 1;
+            if (Press.Button(Keys.Left)) if (kierunek !=1 ) kierunek = 2;
+            if (Press.Button(Keys.Up)) if (kierunek !=4 ) kierunek = 3;
+            if (Press.Button(Keys.Down)) if (kierunek != 4) kierunek = 4;
             playground.Invalidate();
         } 
 
@@ -50,12 +51,23 @@ namespace SnakeMB
         {
             for (int j = snake.Count -1 ; j >= 0; j--)
             {
-               
+           
                 if (kierunek == 1) snake[0].X++;
                 if (kierunek == 2) snake[0].X--;
                 if (kierunek == 3) snake[0].Y--;
                 if (kierunek == 4) snake[0].Y++;
             }
+            Snake head = snake[0];
+            for(int k=0; k<snake.Count; k++)
+            {
+                if (head.X == insect.X && insect.Y == head.Y)
+                {
+
+                    NewInsect();
+
+                }
+            }
+
         }
 
         private void playground_Paint(object sender, PaintEventArgs e)
@@ -70,7 +82,6 @@ namespace SnakeMB
         {
             Press.wcisnijPusc(e.KeyCode, false);
         }
-
         private void Draw(Graphics graphics)
         {
             graphics.FillRectangle(new SolidBrush(Color.Brown), new Rectangle(insect.X * 20, insect.Y * 20, 20, 20));
