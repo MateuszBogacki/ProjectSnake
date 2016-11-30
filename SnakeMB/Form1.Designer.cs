@@ -37,7 +37,7 @@
             this.playground.BackColor = System.Drawing.SystemColors.ActiveCaption;
             this.playground.Location = new System.Drawing.Point(12, 52);
             this.playground.Name = "playground";
-            this.playground.Size = new System.Drawing.Size(529, 331);
+            this.playground.Size = new System.Drawing.Size(520, 320);
             this.playground.TabIndex = 0;
             this.playground.TabStop = false;
             this.playground.Paint += new System.Windows.Forms.PaintEventHandler(this.playground_Paint);
@@ -46,7 +46,7 @@
             // 
             this.AutoScaleDimensions = new System.Drawing.SizeF(6F, 13F);
             this.AutoScaleMode = System.Windows.Forms.AutoScaleMode.Font;
-            this.ClientSize = new System.Drawing.Size(553, 395);
+            this.ClientSize = new System.Drawing.Size(547, 386);
             this.Controls.Add(this.playground);
             this.Name = "Form1";
             this.Text = "Snake";

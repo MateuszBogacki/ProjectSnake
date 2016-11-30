@@ -35,10 +35,10 @@ namespace SnakeMB
 
         private void kierunekRuchu(object sender, EventArgs e)
         {
-            if (Press.Button(Keys.Left))
-            {
-                kierunek = 1;
-            }
+            if (Press.Button(Keys.Right)) kierunek = 1;
+            if (Press.Button(Keys.Left)) kierunek = 2;
+            if (Press.Button(Keys.Up)) kierunek = 3;
+            if (Press.Button(Keys.Down)) kierunek = 4;
             playground.Invalidate();
         } 
 
@@ -48,7 +48,9 @@ namespace SnakeMB
             {
                
                 if (kierunek == 1) snake[0].X++;
-
+                if (kierunek == 2) snake[0].X--;
+                if (kierunek == 3) snake[0].Y--;
+                if (kierunek == 4) snake[0].Y++;
             }
         }
 
@@ -69,7 +71,7 @@ namespace SnakeMB
         {
             Color kolor_weza = i == 0 ? Color.DarkGreen : Color.Green;
             Snake actualPart = snake[i];
-            graphics.FillRectangle(new SolidBrush(kolor_weza), new Rectangle(actualPart.X * 16, actualPart.Y * 16, 16, 16));
+            graphics.FillRectangle(new SolidBrush(kolor_weza), new Rectangle(actualPart.X * 20, actualPart.Y * 20, 20, 20));
         }
        
     }
