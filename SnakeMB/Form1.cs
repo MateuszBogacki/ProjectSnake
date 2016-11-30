@@ -13,6 +13,7 @@ namespace SnakeMB
     public partial class Form1 : Form
     {
         int i;
+        Snake insect;
         int kierunek = 1; // 1 = prawo, 2 = lewo, 3 = góra, 4 = dół
         List<Snake> snake = new List<Snake>(); 
        
@@ -23,17 +24,20 @@ namespace SnakeMB
         {
             InitializeComponent();
             snake.Clear();
-            gameLoop.Tick += new EventHandler(kierunekRuchu);
-            snakeLoop.Tick += new EventHandler(moveSnake);
+            gameLoop.Tick += new EventHandler(KierunekRuchu);
+            snakeLoop.Tick += new EventHandler(MoveSnake);
+            gameLoop.Interval = 1000 / 60;
+            snakeLoop.Interval = 1000 / 5;
             gameLoop.Start();
             snakeLoop.Start();
             Snake head = new Snake(0,0);
             snake.Add(head);
+            NewInsect();
         
 
         }
 
-        private void kierunekRuchu(object sender, EventArgs e)
+        private void KierunekRuchu(object sender, EventArgs e)
         {
             if (Press.Button(Keys.Right)) kierunek = 1;
             if (Press.Button(Keys.Left)) kierunek = 2;
@@ -42,7 +46,7 @@ namespace SnakeMB
             playground.Invalidate();
         } 
 
-        private void moveSnake(object sender, EventArgs e)
+        private void MoveSnake(object sender, EventArgs e)
         {
             for (int j = snake.Count -1 ; j >= 0; j--)
             {
@@ -69,10 +73,16 @@ namespace SnakeMB
 
         private void Draw(Graphics graphics)
         {
+            graphics.FillRectangle(new SolidBrush(Color.Brown), new Rectangle(insect.X * 20, insect.Y * 20, 20, 20));
             Color kolor_weza = i == 0 ? Color.DarkGreen : Color.Green;
             Snake actualPart = snake[i];
             graphics.FillRectangle(new SolidBrush(kolor_weza), new Rectangle(actualPart.X * 20, actualPart.Y * 20, 20, 20));
         }
        
+        private void NewInsect()
+        {
+            Random los = new Random();
+            insect = new Snake(los.Next(0, 26), los.Next(0, 16));
+        }
     }
 }
