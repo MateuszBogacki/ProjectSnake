@@ -13,17 +13,18 @@ namespace SnakeMB
     public partial class Form1 : Form
     {
         int i;
-        int punkty = 0, speed=5;
+        int punkty = 0, speed = 5;
+        int gameOver = 0;
         Snake insect;
         int kierunek = 1; // 1 = prawo, 2 = lewo, 3 = góra, 4 = dół
-        List<Snake> snake = new List<Snake>(); 
+        List<Snake> snake = new List<Snake>();
         Timer gameLoop = new Timer();
         Timer snakeLoop = new Timer();
 
         public Form1()
         {
             InitializeComponent();
-            
+
             gameLoop.Tick += new EventHandler(KierunekRuchu);
             snakeLoop.Tick += new EventHandler(MoveSnake);
             gameLoop.Interval = 1000 / 60;
@@ -31,7 +32,7 @@ namespace SnakeMB
             gameLoop.Start();
             snakeLoop.Start();
             Run();
-        
+
 
         }
         private void Run()
@@ -46,55 +47,57 @@ namespace SnakeMB
         }
         private void KierunekRuchu(object sender, EventArgs e)
         {
+
             if (Press.Button(Keys.Right)) if (kierunek != 2) kierunek = 1;
-            if (Press.Button(Keys.Left)) if (kierunek !=1 ) kierunek = 2;
-            if (Press.Button(Keys.Up)) if (kierunek !=4 ) kierunek = 3;
+            if (Press.Button(Keys.Left)) if (kierunek != 1) kierunek = 2;
+            if (Press.Button(Keys.Up)) if (kierunek != 4) kierunek = 3;
             if (Press.Button(Keys.Down)) if (kierunek != 3) kierunek = 4;
             playground.Invalidate();
+
         }
         private void MoveSnake(object sender, EventArgs e)
         {
-
-            for (int j = snake.Count - 1; j >= 0; j--)
-            {
-                if (j == 0)
+            if (gameOver != 1) {
+                for (int j = snake.Count - 1; j >= 0; j--)
                 {
-                    if (kierunek == 1) snake[0].X++;
-                    if (kierunek == 2) snake[0].X--;
-                    if (kierunek == 3) snake[0].Y--;
-                    if (kierunek == 4) snake[0].Y++;
-
-                    Snake head = snake[0];
-                    for (int k = 0; k < snake.Count; k++)
+                    if (j == 0)
                     {
-                        //Zjadł robaka
-                        if (head.X == insect.X && insect.Y == head.Y)
-                        {
-                            punkty++;
-                            Snake longer = new Snake(snake[snake.Count - 1].X, snake[snake.Count - 1].Y);
-                            snake.Add(longer);
-                            NewInsect();
-                            punkty_lbl.Text = punkty.ToString();
-                            speed++;
+                        if (kierunek == 1) snake[0].X++;
+                        if (kierunek == 2) snake[0].X--;
+                        if (kierunek == 3) snake[0].Y--;
+                        if (kierunek == 4) snake[0].Y++;
 
+                        Snake head = snake[0];
+                        for (int k = 0; k < snake.Count; k++)
+                        {
+                            //Zjadł robaka
+                            if (head.X == insect.X && insect.Y == head.Y)
+                            {
+                                punkty++;
+                                Snake longer = new Snake(snake[snake.Count - 1].X, snake[snake.Count - 1].Y);
+                                snake.Add(longer);
+                                NewInsect();
+                                punkty_lbl.Text = punkty.ToString();
+                                speed++;
+
+                            }
                         }
                     }
-                }
-                else
-                {
-                    snake[j].Y = snake[j - 1].Y;
-                    snake[j].X = snake[j - 1].X;
-                }
+                    else
+                    {
+                        snake[j].Y = snake[j - 1].Y;
+                        snake[j].X = snake[j - 1].X;
+                    }
 
-            }
-        }
+                }
+            } }
         private void playground_Paint(object sender, PaintEventArgs e)
         {
             Draw(e.Graphics);
         }
         private void Form1_KeyDown(object sender, KeyEventArgs e)
         {
-          Press.wcisnijPusc(e.KeyCode, true);
+            Press.wcisnijPusc(e.KeyCode, true);
             if (e.KeyCode == Keys.Escape) { this.Close(); }
             if (e.KeyCode == Keys.F1) { Run(); }
             if (e.KeyCode == Keys.F2) { Gameover(); }
@@ -105,13 +108,14 @@ namespace SnakeMB
         }
         private void Draw(Graphics graphics)
         {
+            if (gameOver != 1) { 
             graphics.FillRectangle(new SolidBrush(Color.Brown), new Rectangle(insect.X * 20, insect.Y * 20, 20, 20));
             for (i = 0; i < snake.Count; i++) {
                 Color kolor_weza = i == 0 ? Color.DarkGreen : Color.Green;
                 Snake actualPart = snake[i];
                 graphics.FillRectangle(new SolidBrush(kolor_weza), new Rectangle(actualPart.X * 20, actualPart.Y * 20, 20, 20));
             }
-        }
+        } }
         private void NewInsect()
         {
             Random los = new Random();
@@ -119,10 +123,26 @@ namespace SnakeMB
         }
         private void Gameover()
         {
-            
+            gameOver = 1;
+            Znikaj();
             
         }
 
+     
+
+        private void Znikaj()
+        {
+            label1.Visible = false;
+            label2.Visible = false;
+            label3.Visible = false;
+            label4.Visible = true;
+            label5.Visible = true;
+            label6.Visible = true;
+            label7.Visible = true;
+            punkty_lbl.Visible = false;
+            label6.Text = punkty.ToString();
+
+        }
        
     }
 }
