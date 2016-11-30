@@ -13,10 +13,10 @@ namespace SnakeMB
     public partial class Form1 : Form
     {
         int i;
+        int punkty = 0, speed=5;
         Snake insect;
         int kierunek = 1; // 1 = prawo, 2 = lewo, 3 = góra, 4 = dół
         List<Snake> snake = new List<Snake>(); 
-       
         Timer gameLoop = new Timer();
         Timer snakeLoop = new Timer();
 
@@ -27,26 +27,31 @@ namespace SnakeMB
             gameLoop.Tick += new EventHandler(KierunekRuchu);
             snakeLoop.Tick += new EventHandler(MoveSnake);
             gameLoop.Interval = 1000 / 60;
-            snakeLoop.Interval = 1000 / 5;
+            snakeLoop.Interval = 1000 / speed;
             gameLoop.Start();
             snakeLoop.Start();
-            snake.Clear();
-            Snake head = new Snake(0,0);
-            snake.Add(head);
-            NewInsect();
+            Run();
         
 
         }
-
+        private void Run()
+        {
+            punkty = 0;
+            punkty_lbl.Text = punkty.ToString();
+            kierunek = 1;
+            snake.Clear();
+            Snake head = new SnakeMB.Snake(0, 0);
+            snake.Add(head);
+            NewInsect();
+        }
         private void KierunekRuchu(object sender, EventArgs e)
         {
             if (Press.Button(Keys.Right)) if (kierunek != 2) kierunek = 1;
             if (Press.Button(Keys.Left)) if (kierunek !=1 ) kierunek = 2;
             if (Press.Button(Keys.Up)) if (kierunek !=4 ) kierunek = 3;
-            if (Press.Button(Keys.Down)) if (kierunek != 4) kierunek = 4;
+            if (Press.Button(Keys.Down)) if (kierunek != 3) kierunek = 4;
             playground.Invalidate();
         }
-
         private void MoveSnake(object sender, EventArgs e)
         {
 
@@ -62,11 +67,15 @@ namespace SnakeMB
                     Snake head = snake[0];
                     for (int k = 0; k < snake.Count; k++)
                     {
+                        //Zjadł robaka
                         if (head.X == insect.X && insect.Y == head.Y)
                         {
+                            punkty++;
                             Snake longer = new Snake(snake[snake.Count - 1].X, snake[snake.Count - 1].Y);
                             snake.Add(longer);
                             NewInsect();
+                            punkty_lbl.Text = punkty.ToString();
+                            speed++;
 
                         }
                     }
@@ -79,14 +88,16 @@ namespace SnakeMB
 
             }
         }
-
         private void playground_Paint(object sender, PaintEventArgs e)
         {
             Draw(e.Graphics);
         }
         private void Form1_KeyDown(object sender, KeyEventArgs e)
         {
-            Press.wcisnijPusc(e.KeyCode, true);
+          Press.wcisnijPusc(e.KeyCode, true);
+            if (e.KeyCode == Keys.Escape) { this.Close(); }
+            if (e.KeyCode == Keys.F1) { Run(); }
+            if (e.KeyCode == Keys.F2) { Gameover(); }
         }
         private void Form1_KeyUp(object sender, KeyEventArgs e)
         {
@@ -101,11 +112,17 @@ namespace SnakeMB
                 graphics.FillRectangle(new SolidBrush(kolor_weza), new Rectangle(actualPart.X * 20, actualPart.Y * 20, 20, 20));
             }
         }
-       
         private void NewInsect()
         {
             Random los = new Random();
             insect = new Snake(los.Next(0, 26), los.Next(0, 16));
         }
+        private void Gameover()
+        {
+            
+            
+        }
+
+       
     }
 }
