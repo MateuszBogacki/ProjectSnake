@@ -14,7 +14,8 @@ namespace SnakeMB
     {
         #region zmienne
         int i;
-        int punkty = 0, speed = 5;
+        int bugX, bugY; //Zmienne przechowujące współrzędne głowy snake'a. Stworzone w celu skasowania błędu polegającego na 
+        int punkty = 0, speed = 5;                           //możliwości zawracania snake'a.
         int gameOver = 0;
         Snake insect;
         int kierunek = 1; // 1 = prawo, 2 = lewo, 3 = góra, 4 = dół
@@ -50,10 +51,10 @@ namespace SnakeMB
         private void KierunekRuchu(object sender, EventArgs e)
         {
 
-            if (Press.Button(Keys.Right)) if (kierunek != 2) kierunek = 1;
-            if (Press.Button(Keys.Left)) if (kierunek != 1) kierunek = 2;
-            if (Press.Button(Keys.Up)) if (kierunek != 4) kierunek = 3;
-            if (Press.Button(Keys.Down)) if (kierunek != 3) kierunek = 4;
+            if (Press.Button(Keys.Right)) if (kierunek != 2 && !(snake[0].X == bugX && snake[0].Y == bugY)) { kierunek = 1; bugX = snake[0].X; bugY = snake[0].Y; }
+            if (Press.Button(Keys.Left))  if (kierunek != 1 && !(snake[0].X == bugX && snake[0].Y == bugY)) { kierunek = 2; bugX = snake[0].X; bugY = snake[0].Y; }
+            if (Press.Button(Keys.Up))    if (kierunek != 4 && !(snake[0].X == bugX && snake[0].Y == bugY)) { kierunek = 3; bugX = snake[0].X; bugY = snake[0].Y; }
+            if (Press.Button(Keys.Down))  if (kierunek != 3 && !(snake[0].X == bugX && snake[0].Y == bugY)) { kierunek = 4; bugX = snake[0].X; bugY = snake[0].Y; }
             playground.Invalidate();
 
         }
@@ -71,10 +72,6 @@ namespace SnakeMB
 
                         Snake head = snake[0];
 
-                        punkty = head.X;
-                        punkty_lbl.Text = punkty.ToString();
-                        
-                      
                         for (int k = 0; k < snake.Count; k++)
                         {
                             //Zjadł robaka
@@ -85,7 +82,7 @@ namespace SnakeMB
                                 snake.Add(longer);
                                 NewInsect();
                                 punkty_lbl.Text = punkty.ToString();
-                                speed++;
+                                speed+=2;
                             }
                             //Kolizja ze ścianą
                             if (head.Y < playground.Top - 52 || head.Y > playground.Bottom - 395 || head.X < playground.Left - 11 || head.X > playground.Right - 677)Gameover();
@@ -157,6 +154,7 @@ namespace SnakeMB
         private void Restart()
         {
             Run();
+            punkty_lbl.Visible = true;
             pkt_lbl.Visible = true;
             exit_lbl.Visible = true;
             restart_lbl.Visible = true;
