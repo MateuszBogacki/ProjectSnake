@@ -14,8 +14,9 @@ namespace SnakeMB
     {
         #region zmienne
         int i;
+        const int min_speed = 4;
         int bugX, bugY; //Zmienne przechowujące współrzędne głowy snake'a. Stworzone w celu skasowania błędu polegającego na 
-        int punkty = 0, speed = 5;                           //możliwości zawracania snake'a.
+        int punkty = 0, speed = min_speed, poziom = 1;                           //możliwości zawracania snake'a.
         int gameOver = 0;
         Snake insect;
         int kierunek = 1; // 1 = prawo, 2 = lewo, 3 = góra, 4 = dół
@@ -39,6 +40,8 @@ namespace SnakeMB
         }
         private void Run()
         {
+            poziom = 1;
+            speed = min_speed;
             gameOver = 0;
             punkty = 0;
             punkty_lbl.Text = punkty.ToString();
@@ -60,6 +63,7 @@ namespace SnakeMB
         }
         private void MoveSnake(object sender, EventArgs e)
         {
+
             if (gameOver != 1) {
                 for (int j = snake.Count - 1; j >= 0; j--)
                 {
@@ -82,14 +86,21 @@ namespace SnakeMB
                                 snake.Add(longer);
                                 NewInsect();
                                 punkty_lbl.Text = punkty.ToString();
-                                speed+=2;
+
+                                if (punkty == 3) { speed += 2; poziom = 2; }
+                                if (punkty == 6) { speed += 2; poziom = 3; }
+                                if (punkty == 10) { speed += 2; poziom = 4; }
+                                if (punkty == 20) { speed += 2; poziom = 5; }
+                                if (punkty == 30) { speed += 2; poziom = 6; }
+                                snakeLoop.Interval = 1000 / speed;
+                                label2.Text = poziom.ToString();
                             }
                             //Kolizja ze ścianą
                             if (head.Y < playground.Top - 52 || head.Y > playground.Bottom - 395 || head.X < playground.Left - 11 || head.X > playground.Right - 677)Gameover();
                             //Kolizja z ciałem
                             for (int l = 2; l < snake.Count; l++)if (snake[0].X == snake[l].X && snake[0].Y == snake[l].Y)Gameover();
-
                             
+
                         }
                     }
                     
@@ -131,6 +142,11 @@ namespace SnakeMB
         {
             Random los = new Random();
             insect = new Snake(los.Next(0, 26), los.Next(0, 16));
+
+            for (int i = 0; i < snake.Count; i++)  //Robaki pojawiały się pod wężem
+            {
+                if (insect.X == snake[i].X && insect.Y == snake[i].Y)NewInsect();
+            }
         }
         private void Gameover()
         {
