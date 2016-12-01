@@ -33,7 +33,7 @@
             this.punkty_lbl = new System.Windows.Forms.Label();
             this.exit_lbl = new System.Windows.Forms.Label();
             this.restart_lbl = new System.Windows.Forms.Label();
-            this.label4 = new System.Windows.Forms.Label();
+            this.main_lbl = new System.Windows.Forms.Label();
             this.label5 = new System.Windows.Forms.Label();
             this.label6 = new System.Windows.Forms.Label();
             this.label7 = new System.Windows.Forms.Label();
@@ -90,19 +90,19 @@
             this.restart_lbl.TabIndex = 4;
             this.restart_lbl.Text = "F1 - Restart";
             // 
-            // label4
+            // main_lbl
             // 
-            this.label4.AutoSize = true;
-            this.label4.BackColor = System.Drawing.SystemColors.ActiveCaption;
-            this.label4.FlatStyle = System.Windows.Forms.FlatStyle.Flat;
-            this.label4.Font = new System.Drawing.Font("Palatino Linotype", 48F, ((System.Drawing.FontStyle)((System.Drawing.FontStyle.Bold | System.Drawing.FontStyle.Italic))), System.Drawing.GraphicsUnit.Point, ((byte)(238)));
-            this.label4.ForeColor = System.Drawing.SystemColors.Desktop;
-            this.label4.Location = new System.Drawing.Point(126, 72);
-            this.label4.Name = "label4";
-            this.label4.Size = new System.Drawing.Size(429, 85);
-            this.label4.TabIndex = 5;
-            this.label4.Text = "GAME OVER";
-            this.label4.Visible = false;
+            this.main_lbl.AutoSize = true;
+            this.main_lbl.BackColor = System.Drawing.SystemColors.ActiveCaption;
+            this.main_lbl.FlatStyle = System.Windows.Forms.FlatStyle.Flat;
+            this.main_lbl.Font = new System.Drawing.Font("Palatino Linotype", 48F, ((System.Drawing.FontStyle)((System.Drawing.FontStyle.Bold | System.Drawing.FontStyle.Italic))), System.Drawing.GraphicsUnit.Point, ((byte)(238)));
+            this.main_lbl.ForeColor = System.Drawing.SystemColors.Desktop;
+            this.main_lbl.Location = new System.Drawing.Point(126, 72);
+            this.main_lbl.Name = "main_lbl";
+            this.main_lbl.Size = new System.Drawing.Size(429, 85);
+            this.main_lbl.TabIndex = 5;
+            this.main_lbl.Text = "GAME OVER";
+            this.main_lbl.Visible = false;
             // 
             // label5
             // 
@@ -148,7 +148,7 @@
             this.Controls.Add(this.label7);
             this.Controls.Add(this.label6);
             this.Controls.Add(this.label5);
-            this.Controls.Add(this.label4);
+            this.Controls.Add(this.main_lbl);
             this.Controls.Add(this.restart_lbl);
             this.Controls.Add(this.exit_lbl);
             this.Controls.Add(this.punkty_lbl);
@@ -171,7 +171,7 @@
         private System.Windows.Forms.Label punkty_lbl;
         private System.Windows.Forms.Label exit_lbl;
         private System.Windows.Forms.Label restart_lbl;
-        private System.Windows.Forms.Label label4;
+        private System.Windows.Forms.Label main_lbl;
         private System.Windows.Forms.Label label5;
         private System.Windows.Forms.Label label6;
         private System.Windows.Forms.Label label7;

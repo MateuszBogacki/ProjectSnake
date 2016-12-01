@@ -143,7 +143,8 @@ namespace SnakeMB
             pkt_lbl.Visible = false;
             exit_lbl.Visible = false;
             restart_lbl.Visible = false;
-            label4.Visible = true;
+            main_lbl.Text = "GAME OVER";
+            main_lbl.Visible = true;
             label5.Visible = true;
             label6.Visible = true;
             label7.Visible = true;
@@ -158,7 +159,7 @@ namespace SnakeMB
             pkt_lbl.Visible = true;
             exit_lbl.Visible = true;
             restart_lbl.Visible = true;
-            label4.Visible = false;
+            main_lbl.Visible = false;
             label5.Visible = false;
             label6.Visible = false;
             label7.Visible = false;
