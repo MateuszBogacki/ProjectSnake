@@ -12,6 +12,7 @@ namespace SnakeMB
 {
     public partial class Form1 : Form
     {
+        #region zmienne
         int i;
         int punkty = 0, speed = 5;
         int gameOver = 0;
@@ -20,7 +21,7 @@ namespace SnakeMB
         List<Snake> snake = new List<Snake>();
         Timer gameLoop = new Timer();
         Timer snakeLoop = new Timer();
-
+        #endregion
         public Form1()
         {
             InitializeComponent();
@@ -37,6 +38,7 @@ namespace SnakeMB
         }
         private void Run()
         {
+            gameOver = 0;
             punkty = 0;
             punkty_lbl.Text = punkty.ToString();
             kierunek = 1;
@@ -68,6 +70,11 @@ namespace SnakeMB
                         if (kierunek == 4) snake[0].Y++;
 
                         Snake head = snake[0];
+
+                        punkty = head.X;
+                        punkty_lbl.Text = punkty.ToString();
+                        
+                      
                         for (int k = 0; k < snake.Count; k++)
                         {
                             //Zjadł robaka
@@ -79,10 +86,16 @@ namespace SnakeMB
                                 NewInsect();
                                 punkty_lbl.Text = punkty.ToString();
                                 speed++;
-
                             }
+                            //Kolizja ze ścianą
+                            if (head.Y < playground.Top - 52 || head.Y > playground.Bottom - 395 || head.X < playground.Left - 11 || head.X > playground.Right - 677)Gameover();
+                            //Kolizja z ciałem
+                            for (int l = 2; l < snake.Count; l++)if (snake[0].X == snake[l].X && snake[0].Y == snake[l].Y)Gameover();
+
+                            
                         }
                     }
+                    
                     else
                     {
                         snake[j].Y = snake[j - 1].Y;
@@ -99,7 +112,7 @@ namespace SnakeMB
         {
             Press.wcisnijPusc(e.KeyCode, true);
             if (e.KeyCode == Keys.Escape) { this.Close(); }
-            if (e.KeyCode == Keys.F1) { Run(); }
+            if (e.KeyCode == Keys.F1) { Restart(); }
             if (e.KeyCode == Keys.F2) { Gameover(); }
         }
         private void Form1_KeyUp(object sender, KeyEventArgs e)
@@ -108,6 +121,7 @@ namespace SnakeMB
         }
         private void Draw(Graphics graphics)
         {
+           
             if (gameOver != 1) { 
             graphics.FillRectangle(new SolidBrush(Color.Brown), new Rectangle(insect.X * 20, insect.Y * 20, 20, 20));
             for (i = 0; i < snake.Count; i++) {
@@ -127,20 +141,29 @@ namespace SnakeMB
             Znikaj();
             
         }
-
-     
-
         private void Znikaj()
         {
-            label1.Visible = false;
-            label2.Visible = false;
-            label3.Visible = false;
+            pkt_lbl.Visible = false;
+            exit_lbl.Visible = false;
+            restart_lbl.Visible = false;
             label4.Visible = true;
             label5.Visible = true;
             label6.Visible = true;
             label7.Visible = true;
             punkty_lbl.Visible = false;
             label6.Text = punkty.ToString();
+
+        }
+        private void Restart()
+        {
+            Run();
+            pkt_lbl.Visible = true;
+            exit_lbl.Visible = true;
+            restart_lbl.Visible = true;
+            label4.Visible = false;
+            label5.Visible = false;
+            label6.Visible = false;
+            label7.Visible = false;
 
         }
        
