@@ -22,6 +22,7 @@ namespace SnakeMB
         {
             
             Form1 form1 = new Form1();
+            form1.multiplayer = false;
             form1.Show();
             this.Visible = false;
         }
@@ -29,6 +30,14 @@ namespace SnakeMB
         private void exit_button_Click(object sender, EventArgs e)
         {
             Application.Exit();
+        }
+
+        private void button1_Click_1(object sender, EventArgs e)
+        {
+            Form1 form1 = new SnakeMB.Form1();
+            form1.multiplayer = true;
+            form1.Show();
+            this.Visible = false;
         }
     }
 }

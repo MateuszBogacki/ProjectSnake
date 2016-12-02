@@ -14,19 +14,20 @@ namespace SnakeMB
     {
         #region zmienne
         int i;
-        bool multiplayer = true;
+        public bool multiplayer=true;
         const int min_speed = 4;
-        int bugX, bugY; //Zmienne przechowujące współrzędne głowy snake'a. Stworzone w celu skasowania błędu polegającego na 
-        int punkty = 0, speed = min_speed, poziom = 1;                           //możliwości zawracania snake'a.
+        int bugX, bugY, bugX2, bugY2; //Zmienne przechowujące współrzędne głowy snake'a. Stworzone w celu skasowania błędu polegającego na 
+                                     //możliwości zawracania snake'a.
+        int punkty = 0, speed = min_speed, poziom = 1;                         
         int gameOver = 0;
         Snake insect;
-        int kierunek = 1; // 1 = prawo, 2 = lewo, 3 = góra, 4 = dół
+        int kierunek = 1;  //1 = prawo   2 = lewo,
+        int kierunek2 = 2; //3 = góra    4 = dół
         List<Snake> snake = new List<Snake>();
         List<Snake> snake2 = new List<Snake>();
         Timer gameLoop = new Timer();
         Timer snakeLoop = new Timer();
         #endregion
-
         public Form1()
         {
             InitializeComponent();
@@ -55,7 +56,7 @@ namespace SnakeMB
             snake.Add(head);
             if (multiplayer)
             {
-                Snake head2 = new SnakeMB.Snake(5, 5);
+                Snake head2 = new SnakeMB.Snake(34, 17);
                 snake2.Add(head2);
             }
             
@@ -64,18 +65,30 @@ namespace SnakeMB
         }
         private void KierunekRuchu(object sender, EventArgs e)
         {
+          
+            //Przyciski pierwszego gracza
 
             if (Press.Button(Keys.Right)) if (kierunek != 2 && !(snake[0].X == bugX && snake[0].Y == bugY)) { kierunek = 1; bugX = snake[0].X; bugY = snake[0].Y; }
             if (Press.Button(Keys.Left))  if (kierunek != 1 && !(snake[0].X == bugX && snake[0].Y == bugY)) { kierunek = 2; bugX = snake[0].X; bugY = snake[0].Y; }
             if (Press.Button(Keys.Up))    if (kierunek != 4 && !(snake[0].X == bugX && snake[0].Y == bugY)) { kierunek = 3; bugX = snake[0].X; bugY = snake[0].Y; }
             if (Press.Button(Keys.Down))  if (kierunek != 3 && !(snake[0].X == bugX && snake[0].Y == bugY)) { kierunek = 4; bugX = snake[0].X; bugY = snake[0].Y; }
-            playground.Invalidate();
 
+            //Przyciski drugiego gracza
+
+            if (Press.Button(Keys.D)) if (kierunek2 != 2 && !(snake2[0].X == bugX2 && snake2[0].Y == bugY2)) { kierunek2 = 1; bugX2 = snake2[0].X; bugY2 = snake2[0].Y; }
+            if (Press.Button(Keys.A)) if (kierunek2 != 1 && !(snake2[0].X == bugX2 && snake2[0].Y == bugY2)) { kierunek2 = 2; bugX2 = snake2[0].X; bugY2 = snake2[0].Y; }
+            if (Press.Button(Keys.W)) if (kierunek2 != 4 && !(snake2[0].X == bugX2 && snake2[0].Y == bugY2)) { kierunek2 = 3; bugX2 = snake2[0].X; bugY2 = snake2[0].Y; }
+            if (Press.Button(Keys.S)) if (kierunek2 != 3 && !(snake2[0].X == bugX2 && snake2[0].Y == bugY2)) { kierunek2 = 4; bugX2 = snake2[0].X; bugY2 = snake2[0].Y; }
+
+            
+            playground.Invalidate();
         }
         private void MoveSnake(object sender, EventArgs e)
         {
 
-            if (gameOver != 1) {
+            if (gameOver != 1)
+            {
+                #region gracz 1 
                 for (int j = snake.Count - 1; j >= 0; j--)
                 {
                     if (j == 0)
@@ -85,9 +98,9 @@ namespace SnakeMB
                         if (kierunek == 3) snake[0].Y--;
                         if (kierunek == 4) snake[0].Y++;
 
-                        #region kolizja p1
+                        #region kolizja gracz1
                         Snake head = snake[0];
-                        
+
                         for (int k = 0; k < snake.Count; k++)
                         {
                             //Zjadł robaka
@@ -108,24 +121,69 @@ namespace SnakeMB
                                 label2.Text = poziom.ToString();
                             }
                             //Kolizja ze ścianą
-                            if (head.Y < playground.Top - 52 || head.Y > playground.Bottom - 395 || head.X < playground.Left - 11 || head.X > playground.Right - 677)Gameover();
+                            if (head.Y < playground.Top - 52 || head.Y > playground.Bottom - 395 || head.X < playground.Left - 11 || head.X > playground.Right - 677) Gameover();
                             //Kolizja z ciałem
-                            for (int l = 2; l < snake.Count; l++)if (snake[0].X == snake[l].X && snake[0].Y == snake[l].Y)Gameover();
-                            
+                            for (int l = 2; l < snake.Count; l++) if (snake[0].X == snake[l].X && snake[0].Y == snake[l].Y) Gameover();
+
 
                         }
+
                         #endregion
 
                     }
-                    
+
                     else
                     {
                         snake[j].Y = snake[j - 1].Y;
                         snake[j].X = snake[j - 1].X;
                     }
-
                 }
-            } }
+                #endregion
+                #region gracz 2
+                if (multiplayer)
+                {
+                    for (int j = snake2.Count-1; j >= 0; j--)
+                    {
+                        if (j == 0)
+                        {
+                            if (kierunek2 == 1) snake2[0].X++;
+                            if (kierunek2 == 2) snake2[0].X--;
+                            if (kierunek2 == 3) snake2[0].Y--;
+                            if (kierunek2 == 4) snake2[0].Y++;
+
+                            #region kolizja gracz 2
+                            Snake head2 = snake2[0];
+                            for (int k = 0; k < snake2.Count; k++)
+                            {
+                                //Zjadł robaka
+                                if (head2.X == insect.X && insect.Y == head2.Y)
+                                {
+                                   
+                                    Snake longer2 = new Snake(snake2[snake2.Count - 1].X, snake2[snake2.Count - 1].Y);
+                                    snake2.Add(longer2);
+                                    NewInsect();
+                                   
+                                }
+                                //Kolizja ze ścianą
+                                if (head2.Y < playground.Top - 52 || head2.Y > playground.Bottom - 395 || head2.X < playground.Left - 11 || head2.X > playground.Right - 677) Gameover();
+                                //Kolizja z ciałem
+                                for (int l = 2; l < snake2.Count; l++) if (snake2[0].X == snake2[l].X && snake2[0].Y == snake2[l].Y) Gameover();
+                            }
+
+                            #endregion kolizja gracz 2
+
+                        }
+                        else
+                        {
+                            snake2[j].Y = snake2[j - 1].Y;
+                            snake2[j].X = snake2[j - 1].X;
+
+                        }
+                    }
+                }
+                #endregion
+            }
+        }
         private void playground_Paint(object sender, PaintEventArgs e)
         {
             Draw(e.Graphics);
@@ -177,7 +235,7 @@ namespace SnakeMB
         private void NewInsect()
         {
             Random los = new Random();
-            insect = new Snake(los.Next(0, 26), los.Next(0, 16));
+            insect = new Snake(los.Next(0, 34), los.Next(0, 17));
 
             for (int i = 0; i < snake.Count; i++)  //Robaki pojawiały się pod wężem
             {

@@ -66,6 +66,7 @@
             this.button1.TabIndex = 2;
             this.button1.Text = "Dwóch graczy";
             this.button1.UseVisualStyleBackColor = true;
+            this.button1.Click += new System.EventHandler(this.button1_Click_1);
             // 
             // exit_button
             // 
