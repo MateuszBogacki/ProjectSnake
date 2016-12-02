@@ -14,6 +14,7 @@ namespace SnakeMB
     {
         #region zmienne
         int i;
+        bool multiplayer = true;
         const int min_speed = 4;
         int bugX, bugY; //Zmienne przechowujące współrzędne głowy snake'a. Stworzone w celu skasowania błędu polegającego na 
         int punkty = 0, speed = min_speed, poziom = 1;                           //możliwości zawracania snake'a.
@@ -21,9 +22,11 @@ namespace SnakeMB
         Snake insect;
         int kierunek = 1; // 1 = prawo, 2 = lewo, 3 = góra, 4 = dół
         List<Snake> snake = new List<Snake>();
+        List<Snake> snake2 = new List<Snake>();
         Timer gameLoop = new Timer();
         Timer snakeLoop = new Timer();
         #endregion
+
         public Form1()
         {
             InitializeComponent();
@@ -47,8 +50,16 @@ namespace SnakeMB
             punkty_lbl.Text = punkty.ToString();
             kierunek = 1;
             snake.Clear();
+
             Snake head = new SnakeMB.Snake(0, 0);
             snake.Add(head);
+            if (multiplayer)
+            {
+                Snake head2 = new SnakeMB.Snake(5, 5);
+                snake2.Add(head2);
+            }
+            
+
             NewInsect();
         }
         private void KierunekRuchu(object sender, EventArgs e)
@@ -74,8 +85,9 @@ namespace SnakeMB
                         if (kierunek == 3) snake[0].Y--;
                         if (kierunek == 4) snake[0].Y++;
 
+                        #region kolizja p1
                         Snake head = snake[0];
-
+                        
                         for (int k = 0; k < snake.Count; k++)
                         {
                             //Zjadł robaka
@@ -102,6 +114,8 @@ namespace SnakeMB
                             
 
                         }
+                        #endregion
+
                     }
                     
                     else
@@ -115,13 +129,23 @@ namespace SnakeMB
         private void playground_Paint(object sender, PaintEventArgs e)
         {
             Draw(e.Graphics);
+            if(multiplayer)Draw2(e.Graphics);
         }
         private void Form1_KeyDown(object sender, KeyEventArgs e)
         {
             Press.wcisnijPusc(e.KeyCode, true);
-            if (e.KeyCode == Keys.Escape) { this.Close(); }
+            if (e.KeyCode == Keys.Escape)
+            {
+                if (gameOver == 0) Gameover();
+                else
+                {
+                    Menu menu = new SnakeMB.Menu();
+                    menu.Show();
+                    this.Close();
+                }
+            }
             if (e.KeyCode == Keys.F1) { Restart(); }
-            if (e.KeyCode == Keys.F2) { Gameover(); }
+           
         }
         private void Form1_KeyUp(object sender, KeyEventArgs e)
         {
@@ -132,12 +156,24 @@ namespace SnakeMB
            
             if (gameOver != 1) { 
             graphics.FillRectangle(new SolidBrush(Color.Brown), new Rectangle(insect.X * 20, insect.Y * 20, 20, 20));
-            for (i = 0; i < snake.Count; i++) {
+
+            for (i = 0; i < snake.Count; i++)
+                {
                 Color kolor_weza = i == 0 ? Color.DarkGreen : Color.Green;
                 Snake actualPart = snake[i];
                 graphics.FillRectangle(new SolidBrush(kolor_weza), new Rectangle(actualPart.X * 20, actualPart.Y * 20, 20, 20));
+                }
             }
-        } }
+        }
+        private void Draw2(Graphics graphics)
+        {
+            for (i = 0; i < snake2.Count; i++)
+            {
+                Color kolor_weza2 = i == 0 ? Color.Orange : Color.DarkOrange;
+                Snake actualPart2 = snake2[i];
+                graphics.FillRectangle(new SolidBrush(kolor_weza2), new Rectangle(actualPart2.X * 20, actualPart2.Y * 20, 20, 20));
+            }
+        }
         private void NewInsect()
         {
             Random los = new Random();

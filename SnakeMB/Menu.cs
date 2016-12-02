@@ -25,5 +25,10 @@ namespace SnakeMB
             form1.Show();
             this.Visible = false;
         }
+
+        private void exit_button_Click(object sender, EventArgs e)
+        {
+            Application.Exit();
+        }
     }
 }
