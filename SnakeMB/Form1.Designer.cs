@@ -37,10 +37,13 @@
             this.label5 = new System.Windows.Forms.Label();
             this.label6 = new System.Windows.Forms.Label();
             this.label7 = new System.Windows.Forms.Label();
+            this.poziom_lbl = new System.Windows.Forms.Label();
+            this.poziom1_lbl = new System.Windows.Forms.Label();
+            this.pkt2_lbl = new System.Windows.Forms.Label();
+            this.punkty2_lbl = new System.Windows.Forms.Label();
+            this.gracz2_lbl = new System.Windows.Forms.Label();
+            this.gracz1_lbl = new System.Windows.Forms.Label();
             this.label1 = new System.Windows.Forms.Label();
-            this.label2 = new System.Windows.Forms.Label();
-            this.label3 = new System.Windows.Forms.Label();
-            this.label4 = new System.Windows.Forms.Label();
             ((System.ComponentModel.ISupportInitialize)(this.playground)).BeginInit();
             this.SuspendLayout();
             // 
@@ -70,7 +73,7 @@
             this.punkty_lbl.AutoSize = true;
             this.punkty_lbl.Font = new System.Drawing.Font("Script MT Bold", 20.25F, System.Drawing.FontStyle.Bold);
             this.punkty_lbl.ForeColor = System.Drawing.Color.Lime;
-            this.punkty_lbl.Location = new System.Drawing.Point(115, 16);
+            this.punkty_lbl.Location = new System.Drawing.Point(126, 16);
             this.punkty_lbl.Name = "punkty_lbl";
             this.punkty_lbl.Size = new System.Drawing.Size(29, 33);
             this.punkty_lbl.TabIndex = 2;
@@ -79,7 +82,7 @@
             // exit_lbl
             // 
             this.exit_lbl.AutoSize = true;
-            this.exit_lbl.Location = new System.Drawing.Point(536, 9);
+            this.exit_lbl.Location = new System.Drawing.Point(660, 9);
             this.exit_lbl.Name = "exit_lbl";
             this.exit_lbl.Size = new System.Drawing.Size(51, 13);
             this.exit_lbl.TabIndex = 3;
@@ -88,7 +91,7 @@
             // restart_lbl
             // 
             this.restart_lbl.AutoSize = true;
-            this.restart_lbl.Location = new System.Drawing.Point(536, 31);
+            this.restart_lbl.Location = new System.Drawing.Point(649, 31);
             this.restart_lbl.Name = "restart_lbl";
             this.restart_lbl.Size = new System.Drawing.Size(62, 13);
             this.restart_lbl.TabIndex = 4;
@@ -101,7 +104,7 @@
             this.main_lbl.FlatStyle = System.Windows.Forms.FlatStyle.Flat;
             this.main_lbl.Font = new System.Drawing.Font("Palatino Linotype", 48F, ((System.Drawing.FontStyle)((System.Drawing.FontStyle.Bold | System.Drawing.FontStyle.Italic))), System.Drawing.GraphicsUnit.Point, ((byte)(238)));
             this.main_lbl.ForeColor = System.Drawing.SystemColors.Desktop;
-            this.main_lbl.Location = new System.Drawing.Point(126, 72);
+            this.main_lbl.Location = new System.Drawing.Point(33, 75);
             this.main_lbl.Name = "main_lbl";
             this.main_lbl.Size = new System.Drawing.Size(429, 85);
             this.main_lbl.TabIndex = 5;
@@ -144,55 +147,93 @@
             this.label7.Text = "Esc - Wyjście \r\nF1 - Restart";
             this.label7.Visible = false;
             // 
+            // poziom_lbl
+            // 
+            this.poziom_lbl.AutoSize = true;
+            this.poziom_lbl.Font = new System.Drawing.Font("Script MT Bold", 20.25F, System.Drawing.FontStyle.Bold, System.Drawing.GraphicsUnit.Point, ((byte)(0)));
+            this.poziom_lbl.ForeColor = System.Drawing.Color.Red;
+            this.poziom_lbl.Location = new System.Drawing.Point(222, 16);
+            this.poziom_lbl.Name = "poziom_lbl";
+            this.poziom_lbl.Size = new System.Drawing.Size(103, 33);
+            this.poziom_lbl.TabIndex = 9;
+            this.poziom_lbl.Text = "Poziom:";
+            // 
+            // poziom1_lbl
+            // 
+            this.poziom1_lbl.AutoSize = true;
+            this.poziom1_lbl.Font = new System.Drawing.Font("Script MT Bold", 20.25F, System.Drawing.FontStyle.Bold);
+            this.poziom1_lbl.ForeColor = System.Drawing.Color.Red;
+            this.poziom1_lbl.Location = new System.Drawing.Point(323, 16);
+            this.poziom1_lbl.Name = "poziom1_lbl";
+            this.poziom1_lbl.Size = new System.Drawing.Size(26, 33);
+            this.poziom1_lbl.TabIndex = 10;
+            this.poziom1_lbl.Text = "1";
+            // 
+            // pkt2_lbl
+            // 
+            this.pkt2_lbl.AutoSize = true;
+            this.pkt2_lbl.Font = new System.Drawing.Font("Script MT Bold", 20.25F, System.Drawing.FontStyle.Bold, System.Drawing.GraphicsUnit.Point, ((byte)(0)));
+            this.pkt2_lbl.ForeColor = System.Drawing.Color.Gold;
+            this.pkt2_lbl.Location = new System.Drawing.Point(418, 16);
+            this.pkt2_lbl.Name = "pkt2_lbl";
+            this.pkt2_lbl.Size = new System.Drawing.Size(103, 33);
+            this.pkt2_lbl.TabIndex = 12;
+            this.pkt2_lbl.Text = "Punkty:";
+            // 
+            // punkty2_lbl
+            // 
+            this.punkty2_lbl.AutoSize = true;
+            this.punkty2_lbl.Font = new System.Drawing.Font("Script MT Bold", 20.25F, System.Drawing.FontStyle.Bold);
+            this.punkty2_lbl.ForeColor = System.Drawing.Color.Gold;
+            this.punkty2_lbl.Location = new System.Drawing.Point(539, 16);
+            this.punkty2_lbl.Name = "punkty2_lbl";
+            this.punkty2_lbl.Size = new System.Drawing.Size(29, 33);
+            this.punkty2_lbl.TabIndex = 13;
+            this.punkty2_lbl.Text = "0";
+            // 
+            // gracz2_lbl
+            // 
+            this.gracz2_lbl.AutoSize = true;
+            this.gracz2_lbl.Font = new System.Drawing.Font("Script MT Bold", 15.75F, System.Drawing.FontStyle.Bold, System.Drawing.GraphicsUnit.Point, ((byte)(0)));
+            this.gracz2_lbl.ForeColor = System.Drawing.Color.DarkOrange;
+            this.gracz2_lbl.Location = new System.Drawing.Point(445, -3);
+            this.gracz2_lbl.Name = "gracz2_lbl";
+            this.gracz2_lbl.Size = new System.Drawing.Size(78, 25);
+            this.gracz2_lbl.TabIndex = 14;
+            this.gracz2_lbl.Text = "Gracz 2";
+            // 
+            // gracz1_lbl
+            // 
+            this.gracz1_lbl.AutoSize = true;
+            this.gracz1_lbl.Font = new System.Drawing.Font("Script MT Bold", 15.75F, System.Drawing.FontStyle.Bold);
+            this.gracz1_lbl.ForeColor = System.Drawing.Color.Green;
+            this.gracz1_lbl.Location = new System.Drawing.Point(34, -3);
+            this.gracz1_lbl.Name = "gracz1_lbl";
+            this.gracz1_lbl.Size = new System.Drawing.Size(75, 25);
+            this.gracz1_lbl.TabIndex = 15;
+            this.gracz1_lbl.Text = "Gracz 1";
+            // 
             // label1
             // 
             this.label1.AutoSize = true;
-            this.label1.Font = new System.Drawing.Font("Script MT Bold", 20.25F, System.Drawing.FontStyle.Bold, System.Drawing.GraphicsUnit.Point, ((byte)(0)));
-            this.label1.ForeColor = System.Drawing.Color.Lime;
-            this.label1.Location = new System.Drawing.Point(222, 16);
+            this.label1.Location = new System.Drawing.Point(595, 6);
             this.label1.Name = "label1";
-            this.label1.Size = new System.Drawing.Size(103, 33);
-            this.label1.TabIndex = 9;
-            this.label1.Text = "Poziom:";
-            // 
-            // label2
-            // 
-            this.label2.AutoSize = true;
-            this.label2.Font = new System.Drawing.Font("Script MT Bold", 20.25F, System.Drawing.FontStyle.Bold);
-            this.label2.ForeColor = System.Drawing.Color.Lime;
-            this.label2.Location = new System.Drawing.Point(323, 16);
-            this.label2.Name = "label2";
-            this.label2.Size = new System.Drawing.Size(26, 33);
-            this.label2.TabIndex = 10;
-            this.label2.Text = "1";
-            // 
-            // label3
-            // 
-            this.label3.AutoSize = true;
-            this.label3.Location = new System.Drawing.Point(407, 9);
-            this.label3.Name = "label3";
-            this.label3.Size = new System.Drawing.Size(35, 13);
-            this.label3.TabIndex = 11;
-            this.label3.Text = "label3";
-            // 
-            // label4
-            // 
-            this.label4.AutoSize = true;
-            this.label4.Location = new System.Drawing.Point(407, 31);
-            this.label4.Name = "label4";
-            this.label4.Size = new System.Drawing.Size(35, 13);
-            this.label4.TabIndex = 12;
-            this.label4.Text = "label4";
+            this.label1.Size = new System.Drawing.Size(35, 13);
+            this.label1.TabIndex = 16;
+            this.label1.Text = "label1";
             // 
             // Form1
             // 
             this.AutoScaleDimensions = new System.Drawing.SizeF(6F, 13F);
             this.AutoScaleMode = System.Windows.Forms.AutoScaleMode.Font;
             this.ClientSize = new System.Drawing.Size(723, 424);
-            this.Controls.Add(this.label4);
-            this.Controls.Add(this.label3);
-            this.Controls.Add(this.label2);
             this.Controls.Add(this.label1);
+            this.Controls.Add(this.gracz1_lbl);
+            this.Controls.Add(this.gracz2_lbl);
+            this.Controls.Add(this.punkty2_lbl);
+            this.Controls.Add(this.pkt2_lbl);
+            this.Controls.Add(this.poziom1_lbl);
+            this.Controls.Add(this.poziom_lbl);
             this.Controls.Add(this.label7);
             this.Controls.Add(this.label6);
             this.Controls.Add(this.label5);
@@ -223,10 +264,13 @@
         private System.Windows.Forms.Label label5;
         private System.Windows.Forms.Label label6;
         private System.Windows.Forms.Label label7;
+        private System.Windows.Forms.Label poziom_lbl;
+        private System.Windows.Forms.Label poziom1_lbl;
+        private System.Windows.Forms.Label pkt2_lbl;
+        private System.Windows.Forms.Label punkty2_lbl;
+        private System.Windows.Forms.Label gracz2_lbl;
+        private System.Windows.Forms.Label gracz1_lbl;
         private System.Windows.Forms.Label label1;
-        private System.Windows.Forms.Label label2;
-        private System.Windows.Forms.Label label3;
-        private System.Windows.Forms.Label label4;
     }
 }
 
