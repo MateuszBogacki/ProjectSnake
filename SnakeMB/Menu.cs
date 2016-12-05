@@ -12,6 +12,7 @@ namespace SnakeMB
 {
     public partial class Menu : Form
     {
+        bool multiplayer; 
         public Menu()
         {
             InitializeComponent();
@@ -20,10 +21,10 @@ namespace SnakeMB
 
         private void button1_Click(object sender, EventArgs e)
         {
+            this.multiplayer = false;   
+            Form1 form1 = new Form1(this.multiplayer);
             
-            Form1 form1 = new Form1();
-            form1.multiplayer=false;
-            StartGame();
+            StartGame(form1);
         }
 
         private void exit_button_Click(object sender, EventArgs e)
@@ -33,14 +34,14 @@ namespace SnakeMB
 
         private void button1_Click_1(object sender, EventArgs e)
         {
-            Form1 form1 = new SnakeMB.Form1();
-            form1.multiplayer = true;
-            StartGame();
+            this.multiplayer = true;
+            Form1 form1 = new Form1(this.multiplayer);
+
+            StartGame(form1);
         }
-        private void StartGame()
+        private void StartGame(Form1 form)
         {
-            Form1 form = new SnakeMB.Form1();
-            form.Show();
+             form.Show();
             this.Visible = false;
         }
     }

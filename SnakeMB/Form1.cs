@@ -14,7 +14,7 @@ namespace SnakeMB
     {
         #region zmienne
         int i;
-        public bool multiplayer=true;
+        bool multiplayer=true;
         const int min_speed = 8;
         int bugX, bugY, bugX2, bugY2; //Zmienne przechowujące współrzędne głowy snake'a. Stworzone w celu skasowania błędu polegającego na 
                                      //możliwości zawracania snake'a.
@@ -29,8 +29,9 @@ namespace SnakeMB
         Timer gameLoop = new Timer();
         Timer snakeLoop = new Timer();
         #endregion
-        public Form1()
+        public Form1(bool multiplayer)
         {
+            this.multiplayer = multiplayer;
             InitializeComponent();
 
             gameLoop.Tick += new EventHandler(KierunekRuchu);
@@ -55,8 +56,7 @@ namespace SnakeMB
                 Multiplayer();
             }
             NewInsect();
-           // if (multiplayer) punkty_lbl.Text = "Multi";
-           // else punkty_lbl.Text = "Single";
+          
         }
         private void KierunekRuchu(object sender, EventArgs e)
         {
@@ -125,14 +125,16 @@ namespace SnakeMB
                                     Wygral2();
                                 }
                             //Kolizja z drugim graczem
-                            for (int l = 1; l < snake.Count; l++) if (snake[l].X == snake2[0].X && snake[l].Y == snake2[0].Y)
-                                {
-                                    k = snake2.Count;
-                                    l = snake.Count;
-                                    Wygral1();
-                                }
-                            if (head.X == snake2[0].X && head.Y == snake2[0].Y)Remis();
-
+                            if (multiplayer)
+                            {
+                                for (int l = 1; l < snake.Count; l++) if (snake[l].X == snake2[0].X && snake[l].Y == snake2[0].Y)
+                                    {
+                                        k = snake2.Count;
+                                        l = snake.Count;
+                                        Wygral1();
+                                    }
+                                if (head.X == snake2[0].X && head.Y == snake2[0].Y) Remis();
+                            }
 
                         }
 
@@ -198,7 +200,7 @@ namespace SnakeMB
                                         l = snake2.Count;
                                         Wygral2();
                                     }
-                                //if (head2.X == snake[0].X && head2.Y == snake[0].Y) Remis();
+                                if(multiplayer)if (head2.X == snake[0].X && head2.Y == snake[0].Y) Remis();
                             }
 
                             #endregion kolizja gracz 2
@@ -275,6 +277,15 @@ namespace SnakeMB
             for (int i = 0; i < snake.Count; i++)  //Robaki pojawiały się pod wężem
             {
                 if (insect.X == snake[i].X && insect.Y == snake[i].Y)NewInsect();
+            }
+            if (multiplayer)
+            {
+
+                for (int i = 0; i < snake2.Count; i++)  //Robaki pojawiały się pod wężem2
+                {
+                    if (insect.X == snake2[i].X && insect.Y == snake2[i].Y) NewInsect();
+                }
+
             }
         }
         private void Gameover()
@@ -371,7 +382,7 @@ namespace SnakeMB
         private void Wygral1()
         {
             Gameover();
-            main_lbl.Text = "Wygrał Wajcha!!!";
+            main_lbl.Text = "Wygrał gracz 2!!!";
             wygral1++;
             Wynik();
             
@@ -381,7 +392,7 @@ namespace SnakeMB
         {
             
             Gameover();
-            main_lbl.Text = "Wygrał Manti!!!";
+            main_lbl.Text = "Wygrał gracz 1!!!";
             wygral2++;
             Wynik();
         }
