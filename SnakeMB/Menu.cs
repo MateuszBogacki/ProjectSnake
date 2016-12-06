@@ -36,7 +36,6 @@ namespace SnakeMB
         {
             this.multiplayer = true;
             Form1 form1 = new Form1(this.multiplayer);
-
             StartGame(form1);
         }
         private void StartGame(Form1 form)
@@ -44,5 +43,6 @@ namespace SnakeMB
              form.Show();
             this.Visible = false;
         }
+        
     }
 }

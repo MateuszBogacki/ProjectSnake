@@ -31,7 +31,7 @@
             System.ComponentModel.ComponentResourceManager resources = new System.ComponentModel.ComponentResourceManager(typeof(Menu));
             this.pictureBox1 = new System.Windows.Forms.PictureBox();
             this.onePlayer_button = new System.Windows.Forms.Button();
-            this.button1 = new System.Windows.Forms.Button();
+            this.twoPlayers_button = new System.Windows.Forms.Button();
             this.exit_button = new System.Windows.Forms.Button();
             ((System.ComponentModel.ISupportInitialize)(this.pictureBox1)).BeginInit();
             this.SuspendLayout();
@@ -57,16 +57,16 @@
             this.onePlayer_button.UseVisualStyleBackColor = true;
             this.onePlayer_button.Click += new System.EventHandler(this.button1_Click);
             // 
-            // button1
+            // twoPlayers_button
             // 
-            this.button1.Font = new System.Drawing.Font("Palatino Linotype", 18F, System.Drawing.FontStyle.Bold, System.Drawing.GraphicsUnit.Point, ((byte)(238)));
-            this.button1.Location = new System.Drawing.Point(331, 135);
-            this.button1.Name = "button1";
-            this.button1.Size = new System.Drawing.Size(180, 45);
-            this.button1.TabIndex = 2;
-            this.button1.Text = "Dwóch graczy";
-            this.button1.UseVisualStyleBackColor = true;
-            this.button1.Click += new System.EventHandler(this.button1_Click_1);
+            this.twoPlayers_button.Font = new System.Drawing.Font("Palatino Linotype", 18F, System.Drawing.FontStyle.Bold, System.Drawing.GraphicsUnit.Point, ((byte)(238)));
+            this.twoPlayers_button.Location = new System.Drawing.Point(331, 135);
+            this.twoPlayers_button.Name = "twoPlayers_button";
+            this.twoPlayers_button.Size = new System.Drawing.Size(180, 45);
+            this.twoPlayers_button.TabIndex = 2;
+            this.twoPlayers_button.Text = "Dwóch graczy";
+            this.twoPlayers_button.UseVisualStyleBackColor = true;
+            this.twoPlayers_button.Click += new System.EventHandler(this.button1_Click_1);
             // 
             // exit_button
             // 
@@ -85,9 +85,10 @@
             this.AutoScaleMode = System.Windows.Forms.AutoScaleMode.Font;
             this.ClientSize = new System.Drawing.Size(601, 375);
             this.Controls.Add(this.exit_button);
-            this.Controls.Add(this.button1);
+            this.Controls.Add(this.twoPlayers_button);
             this.Controls.Add(this.onePlayer_button);
             this.Controls.Add(this.pictureBox1);
+            this.KeyPreview = true;
             this.Name = "Menu";
             this.Text = "Menu";
             ((System.ComponentModel.ISupportInitialize)(this.pictureBox1)).EndInit();
@@ -99,7 +100,7 @@
 
         private System.Windows.Forms.PictureBox pictureBox1;
         private System.Windows.Forms.Button onePlayer_button;
-        private System.Windows.Forms.Button button1;
+        private System.Windows.Forms.Button twoPlayers_button;
         private System.Windows.Forms.Button exit_button;
     }
 }

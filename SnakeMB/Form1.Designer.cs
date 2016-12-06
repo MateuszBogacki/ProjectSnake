@@ -28,6 +28,7 @@
         /// </summary>
         private void InitializeComponent()
         {
+            System.ComponentModel.ComponentResourceManager resources = new System.ComponentModel.ComponentResourceManager(typeof(Form1));
             this.playground = new System.Windows.Forms.PictureBox();
             this.pkt_lbl = new System.Windows.Forms.Label();
             this.punkty_lbl = new System.Windows.Forms.Label();
@@ -43,13 +44,15 @@
             this.punkty2_lbl = new System.Windows.Forms.Label();
             this.gracz2_lbl = new System.Windows.Forms.Label();
             this.gracz1_lbl = new System.Windows.Forms.Label();
-            this.label1 = new System.Windows.Forms.Label();
             ((System.ComponentModel.ISupportInitialize)(this.playground)).BeginInit();
             this.SuspendLayout();
             // 
             // playground
             // 
             this.playground.BackColor = System.Drawing.SystemColors.ActiveCaption;
+            this.playground.ErrorImage = null;
+            this.playground.Image = ((System.Drawing.Image)(resources.GetObject("playground.Image")));
+            this.playground.ImageLocation = "";
             this.playground.Location = new System.Drawing.Point(11, 52);
             this.playground.Name = "playground";
             this.playground.Size = new System.Drawing.Size(700, 360);
@@ -100,11 +103,10 @@
             // main_lbl
             // 
             this.main_lbl.AutoSize = true;
-            this.main_lbl.BackColor = System.Drawing.SystemColors.ActiveCaption;
             this.main_lbl.FlatStyle = System.Windows.Forms.FlatStyle.Flat;
             this.main_lbl.Font = new System.Drawing.Font("Palatino Linotype", 48F, ((System.Drawing.FontStyle)((System.Drawing.FontStyle.Bold | System.Drawing.FontStyle.Italic))), System.Drawing.GraphicsUnit.Point, ((byte)(238)));
-            this.main_lbl.ForeColor = System.Drawing.SystemColors.Desktop;
-            this.main_lbl.Location = new System.Drawing.Point(33, 75);
+            this.main_lbl.ForeColor = System.Drawing.Color.Black;
+            this.main_lbl.Location = new System.Drawing.Point(24, 22);
             this.main_lbl.Name = "main_lbl";
             this.main_lbl.Size = new System.Drawing.Size(429, 85);
             this.main_lbl.TabIndex = 5;
@@ -116,7 +118,7 @@
             this.label5.AutoSize = true;
             this.label5.BackColor = System.Drawing.SystemColors.ActiveCaption;
             this.label5.Font = new System.Drawing.Font("Palatino Linotype", 26.25F, ((System.Drawing.FontStyle)((System.Drawing.FontStyle.Bold | System.Drawing.FontStyle.Italic))));
-            this.label5.Location = new System.Drawing.Point(177, 172);
+            this.label5.Location = new System.Drawing.Point(31, 163);
             this.label5.Name = "label5";
             this.label5.Size = new System.Drawing.Size(285, 47);
             this.label5.TabIndex = 6;
@@ -128,7 +130,7 @@
             this.label6.AutoSize = true;
             this.label6.BackColor = System.Drawing.SystemColors.ActiveCaption;
             this.label6.Font = new System.Drawing.Font("Palatino Linotype", 26.25F, ((System.Drawing.FontStyle)((System.Drawing.FontStyle.Bold | System.Drawing.FontStyle.Italic))));
-            this.label6.Location = new System.Drawing.Point(483, 172);
+            this.label6.Location = new System.Drawing.Point(334, 163);
             this.label6.Name = "label6";
             this.label6.Size = new System.Drawing.Size(38, 47);
             this.label6.TabIndex = 7;
@@ -140,7 +142,7 @@
             this.label7.AutoSize = true;
             this.label7.BackColor = System.Drawing.SystemColors.ActiveCaption;
             this.label7.Font = new System.Drawing.Font("Palatino Linotype", 21.75F, ((System.Drawing.FontStyle)((System.Drawing.FontStyle.Bold | System.Drawing.FontStyle.Italic))), System.Drawing.GraphicsUnit.Point, ((byte)(238)));
-            this.label7.Location = new System.Drawing.Point(245, 247);
+            this.label7.Location = new System.Drawing.Point(32, 239);
             this.label7.Name = "label7";
             this.label7.Size = new System.Drawing.Size(197, 76);
             this.label7.TabIndex = 8;
@@ -213,21 +215,11 @@
             this.gracz1_lbl.TabIndex = 15;
             this.gracz1_lbl.Text = "Gracz 1";
             // 
-            // label1
-            // 
-            this.label1.AutoSize = true;
-            this.label1.Location = new System.Drawing.Point(595, 6);
-            this.label1.Name = "label1";
-            this.label1.Size = new System.Drawing.Size(35, 13);
-            this.label1.TabIndex = 16;
-            this.label1.Text = "label1";
-            // 
             // Form1
             // 
             this.AutoScaleDimensions = new System.Drawing.SizeF(6F, 13F);
             this.AutoScaleMode = System.Windows.Forms.AutoScaleMode.Font;
             this.ClientSize = new System.Drawing.Size(723, 424);
-            this.Controls.Add(this.label1);
             this.Controls.Add(this.gracz1_lbl);
             this.Controls.Add(this.gracz2_lbl);
             this.Controls.Add(this.punkty2_lbl);
@@ -243,6 +235,7 @@
             this.Controls.Add(this.punkty_lbl);
             this.Controls.Add(this.pkt_lbl);
             this.Controls.Add(this.playground);
+            this.KeyPreview = true;
             this.Name = "Form1";
             this.Text = "Snake";
             this.KeyDown += new System.Windows.Forms.KeyEventHandler(this.Form1_KeyDown);
@@ -270,7 +263,6 @@
         private System.Windows.Forms.Label punkty2_lbl;
         private System.Windows.Forms.Label gracz2_lbl;
         private System.Windows.Forms.Label gracz1_lbl;
-        private System.Windows.Forms.Label label1;
     }
 }
 
