@@ -33,6 +33,7 @@
             this.onePlayer_button = new System.Windows.Forms.Button();
             this.twoPlayers_button = new System.Windows.Forms.Button();
             this.exit_button = new System.Windows.Forms.Button();
+            this.button1 = new System.Windows.Forms.Button();
             ((System.ComponentModel.ISupportInitialize)(this.pictureBox1)).BeginInit();
             this.SuspendLayout();
             // 
@@ -79,11 +80,23 @@
             this.exit_button.UseVisualStyleBackColor = true;
             this.exit_button.Click += new System.EventHandler(this.exit_button_Click);
             // 
+            // button1
+            // 
+            this.button1.Font = new System.Drawing.Font("Palatino Linotype", 18F, System.Drawing.FontStyle.Bold);
+            this.button1.Location = new System.Drawing.Point(331, 239);
+            this.button1.Name = "button1";
+            this.button1.Size = new System.Drawing.Size(180, 39);
+            this.button1.TabIndex = 4;
+            this.button1.Text = "Pomoc";
+            this.button1.UseVisualStyleBackColor = true;
+            this.button1.Click += new System.EventHandler(this.button1_Click_2);
+            // 
             // Menu
             // 
             this.AutoScaleDimensions = new System.Drawing.SizeF(6F, 13F);
             this.AutoScaleMode = System.Windows.Forms.AutoScaleMode.Font;
             this.ClientSize = new System.Drawing.Size(601, 375);
+            this.Controls.Add(this.button1);
             this.Controls.Add(this.exit_button);
             this.Controls.Add(this.twoPlayers_button);
             this.Controls.Add(this.onePlayer_button);
@@ -102,5 +115,6 @@
         private System.Windows.Forms.Button onePlayer_button;
         private System.Windows.Forms.Button twoPlayers_button;
         private System.Windows.Forms.Button exit_button;
+        private System.Windows.Forms.Button button1;
     }
 }

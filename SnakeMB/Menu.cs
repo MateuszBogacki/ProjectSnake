@@ -43,6 +43,10 @@ namespace SnakeMB
              form.Show();
             this.Visible = false;
         }
-        
+
+        private void button1_Click_2(object sender, EventArgs e)
+        {
+            MessageBox.Show("Sterowanie: \n \n Gracz 1 : \"←\" - lewo, \"→\" - prawo, \"↑\" - góra, \"↓\" - dół. \n\n Gracz 2 : \"A\" - lewo, \"D\" - prawo, \"W\" - góra, \"S\" - dół. \n\n Zasady gry multiplayer :\n\n Przegrywa gracz, który : \n ♦Pierwszy uderzy w ścianę, \n ♦\"Ugryzie\" drugiego gracza,\n ♦Którego przeciwnik osiągnie 30pkt.\n\n♦Wąż rośnie po znedzeniu \"robaka\",\n♦Szybkość węża rośnie w miarę jedzienia.", "POMOC");
+        }
     }
 }

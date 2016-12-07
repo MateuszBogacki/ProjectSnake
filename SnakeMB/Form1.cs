@@ -48,11 +48,11 @@ namespace SnakeMB
         private void Run()
         {
             Zeruj();
-            Snake head = new SnakeMB.Snake(-1, 0);
+            Snake head = new SnakeMB.Snake(-1, 1);
             snake.Add(head);
             if (multiplayer)
             {
-                Snake head2 = new SnakeMB.Snake(35, 17);
+                Snake head2 = new SnakeMB.Snake(35, 16);
                 snake2.Add(head2);
                 Multiplayer();
             }
@@ -85,7 +85,6 @@ namespace SnakeMB
         }
         private void MoveSnake(object sender, EventArgs e)
         {
-
             if (gameOver!=1)
             {
                 #region gracz 1 
@@ -119,18 +118,22 @@ namespace SnakeMB
                                 snake.Add(longer);
                                 NewInsect();
                                 punkty_lbl.Text = punkty1.ToString();
-                                if (multiplayer) punktyRazem++;
+                                if (multiplayer)
+                                {
+                                    punktyRazem++;
+                                    if (punkty1 == 30) Wygral1();
+                                }
                                 LevelUp();
-                                if (punkty1 == 30) Wygral1();
                             }
                             //Kolizja ze ścianą
-                            if (head.Y < playground.Top - 52 || head.Y > playground.Bottom - 395 || head.X < playground.Left - 11 || head.X > playground.Right - 677)
-                            {
-                                k = snake.Count;
-                                if (multiplayer) Wygral2();
-                                else Gameover();
-                            }
-                             //Kolizja z ciałem
+                             if (head.Y < playground.Top - 52 || head.Y > playground.Bottom - 395 || head.X < playground.Left - 11 || head.X > playground.Right - 677)
+                             {
+                                 k = snake.Count;
+                                 if (multiplayer) Wygral2();
+                                 else Gameover();
+                             }
+                          
+                                //Kolizja z ciałem
 
                                 for (int l = 3; l < snake.Count; l++) if (head.X == snake[l].X && head.Y == snake[l].Y)
                                 {
@@ -426,11 +429,24 @@ namespace SnakeMB
         }
         private void LevelUp()
         {
-            if (punktyRazem == 6) { speed += 2; poziom = 2; }
-            if (punktyRazem == 10) { speed += 2; poziom = 3; }
-            if (punktyRazem == 15) { speed += 2; poziom = 4; }
-            if (punktyRazem == 25) { speed += 2; poziom = 5; }
-            if (punktyRazem == 35) { speed += 2; poziom = 6; }
+            if (multiplayer)
+            {
+                if (punktyRazem == 5) { speed += 2; poziom = 2; }
+                if (punktyRazem == 10) { speed += 2; poziom = 3; }
+                if (punktyRazem == 20) { speed += 2; poziom = 4; }
+                if (punktyRazem == 30) { speed += 2; poziom = 5; }
+                if (punktyRazem == 45) { speed += 2; poziom = 6; }
+                if (punktyRazem == 55) { speed += 2; poziom = 7; }
+            }
+            else
+            {
+                if (punkty1 == 5) { speed += 2; poziom = 2; }
+                if (punkty1 == 10) { speed += 2; poziom = 3; }
+                if (punkty1 == 20) { speed += 2; poziom = 4; }
+                if (punkty1 == 30) { speed += 2; poziom = 5; }
+                if (punkty1 == 45) { speed += 2; poziom = 6; }
+                if (punktyRazem == 55) { speed += 2; poziom = 7; }
+            }
             snakeLoop.Interval = 1000 / speed;
             poziom1_lbl.Text = poziom.ToString();
         }
@@ -452,8 +468,13 @@ namespace SnakeMB
         private void Transparent()
         {
             main_lbl.Parent = playground;
+            label5.Parent = playground;
+            label6.Parent = playground;
+            label7.Parent = playground;
             main_lbl.BackColor = Color.Transparent;
-            main_lbl.Refresh();
+            label5.BackColor = Color.Transparent;
+            label6.BackColor = Color.Transparent;
+            label7.BackColor = Color.Transparent;
         }
 
         
